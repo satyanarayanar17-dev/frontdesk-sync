@@ -5,9 +5,9 @@ export const Route = createFileRoute("/dashboard")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Dashboard — FrontDesk AI for Trades" },
+      { title: "Dashboard — FrontDesk" },
       { name: "description", content: "Internal operations dashboard for FrontDesk leads and pilots." },
-      { property: "og:title", content: "Dashboard — FrontDesk AI for Trades" },
+      { property: "og:title", content: "Dashboard — FrontDesk" },
       { property: "og:description", content: "Internal operations dashboard." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
