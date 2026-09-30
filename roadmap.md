@@ -1,4 +1,5 @@
 # FRONTDESK marketing update
-- [x] Create master, dental, trades, process, pricing and demo pages with dedicated metadata.
-- [x] Preserve existing owner pages and reuse pilot interest submissions for marketing requests.
-- [ ] Verify links, form validation, desktop/mobile presentation and preview errors.
+- [x] Consolidated website completion pass (positioning, dental trust, demo prep, 7-day pilot, pricing, forms, privacy).
+- [x] QA at 390/768/1440 on all public and owner routes.
+- [ ] Add real demo number(s) in src/lib/demo-config.ts when ready (blocked: number not yet available).
+- [ ] Add legal entity/contact details to privacy page (blocked: details not provided).

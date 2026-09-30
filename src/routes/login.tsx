@@ -6,9 +6,9 @@ export const Route = createFileRoute("/login")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Owner login — FrontDesk AI for Trades" },
+      { title: "Owner login — FrontDesk" },
       { name: "description", content: "Owner sign-in for the FrontDesk operations dashboard." },
-      { property: "og:title", content: "Owner login — FrontDesk AI for Trades" },
+      { property: "og:title", content: "Owner login — FrontDesk" },
       { property: "og:description", content: "Owner sign-in for the FrontDesk operations dashboard." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
