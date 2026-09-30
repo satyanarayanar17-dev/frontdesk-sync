@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Public marketing pages share `src/components/Marketing.tsx` while owner routes stay independent, so brand changes do not alter operations.
+- Demo and pilot interest reuse `frontdesk_pilot_interests` with source and request markers in `notes`, so no production schema migration is needed.
