@@ -14,6 +14,7 @@ type Fields = {
   city: string;
   callsPerWeek: string;
   notes: string;
+  vertical: string;
 };
 
 type Errors = Partial<Record<keyof Fields, string>>;
@@ -27,13 +28,14 @@ const EMPTY: Fields = {
   city: "",
   callsPerWeek: "",
   notes: "",
+  vertical: "",
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const PHONE_RE = /^[+0-9][0-9\s\-()]{6,}$/;
 const URL_RE = /^(https?:\/\/)?([\w-]+\.)+[a-z]{2,}(\/\S*)?$/i;
 
-function validate(fields: Fields): Errors {
+function validate(fields: Fields, kind: "pilot" | "demo"): Errors {
   const errors: Errors = {};
   if (!fields.businessName.trim()) errors.businessName = "Please enter your business name.";
   if (!fields.contactName.trim()) errors.contactName = "Please enter a contact name.";
@@ -41,7 +43,8 @@ function validate(fields: Fields): Errors {
   else if (!EMAIL_RE.test(fields.email.trim())) errors.email = "That email doesn't look right.";
   if (!fields.phone.trim()) errors.phone = "Please enter a phone number.";
   else if (!PHONE_RE.test(fields.phone.trim())) errors.phone = "That phone number doesn't look right.";
-  if (!fields.city.trim()) errors.city = "Please enter your town or city.";
+  if (kind === "demo" && !fields.vertical) errors.vertical = "Please choose Dental or Trades.";
+  if (kind === "pilot" && !fields.city.trim()) errors.city = "Please enter your town or city.";
   if (fields.website.trim() && !URL_RE.test(fields.website.trim()))
     errors.website = "That website address doesn't look right.";
   return errors;
@@ -54,7 +57,7 @@ const labelClass = "mb-1.5 block text-sm font-medium text-foreground";
 
 const errorClass = "mt-1.5 text-xs text-destructive";
 
-export function PilotForm({ source = "home", buttonText = "Start a 14-day pilot", kind = "pilot" }: { source?: "home" | "dental" | "trades" | "demo"; buttonText?: string | undefined; kind?: "pilot" | "demo" }) {
+export function PilotForm({ source = "home", buttonText = "Start the 7-day Pilot", kind = "pilot" }: { source?: "home" | "dental" | "trades" | "demo"; buttonText?: string | undefined; kind?: "pilot" | "demo" }) {
   const [fields, setFields] = useState<Fields>(EMPTY);
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
@@ -70,7 +73,7 @@ export function PilotForm({ source = "home", buttonText = "Start a 14-day pilot"
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (submitting) return;
-    const nextErrors = validate(fields);
+    const nextErrors = validate(fields, kind);
     setErrors(nextErrors);
     if (Object.values(nextErrors).some(Boolean)) return;
     setSubmitError(null);
@@ -86,9 +89,9 @@ export function PilotForm({ source = "home", buttonText = "Start a 14-day pilot"
       email: fields.email.trim(),
       phone: fields.phone.trim(),
       website: t(fields.website),
-      city: fields.city.trim(),
+      city: t(fields.city),
       calls_per_week: t(fields.callsPerWeek),
-      notes: `[source:${source}] [request:${kind}]${fields.notes.trim() ? ` ${fields.notes.trim()}` : ""}`,
+      notes: `[source:${source}] [request:${kind}]${fields.vertical ? ` [vertical:${fields.vertical}]` : ""}${fields.notes.trim() ? ` ${fields.notes.trim()}` : ""}`,
     });
     setSubmitting(false);
     if (error) {
@@ -115,10 +118,11 @@ export function PilotForm({ source = "home", buttonText = "Start a 14-day pilot"
             <path d="M20 6 9 17l-5-5" />
           </svg>
         </div>
-        <h3 className="mt-5 text-xl font-semibold">Thanks — you're on the list.</h3>
+        <h3 className="mt-5 text-xl font-semibold">
+          {kind === "demo" ? "Thanks — we’ll be in touch to arrange your FrontDesk demo." : "Thanks — we’ve received your 7-day pilot enquiry."}
+        </h3>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          Thanks for your {kind === "demo" ? "demo request" : "14-day pilot enquiry"}
-          {fields.businessName.trim() ? ` for ${fields.businessName.trim()}` : ""}.
+          {kind === "demo" ? "We’ll contact you using the details you provided." : "We’ll be in touch to discuss your setup."}
         </p>
         <Button
           type="button"
@@ -235,6 +239,20 @@ export function PilotForm({ source = "home", buttonText = "Start a 14-day pilot"
           )}
         </div>
 
+        {kind === "demo" && (
+        <div className="sm:col-span-2">
+          <label htmlFor="vertical" className={labelClass}>
+            Which demo? <span className="text-brand">*</span>
+          </label>
+          <select id="vertical" className={inputClass} value={fields.vertical} onChange={(e) => set("vertical")(e.target.value)} aria-invalid={Boolean(errors.vertical)} aria-describedby={errors.vertical ? "vertical-error" : undefined}>
+            <option value="">Select one</option>
+            <option value="dental">Dental</option>
+            <option value="trades">Trades</option>
+          </select>
+          {errors.vertical && (<p id="vertical-error" className={errorClass} role="alert">{errors.vertical}</p>)}
+        </div>
+        )}
+
         <div>
           <label htmlFor="website" className={labelClass}>
             Website <span className="text-muted-foreground">(optional)</span>
@@ -257,6 +275,7 @@ export function PilotForm({ source = "home", buttonText = "Start a 14-day pilot"
           )}
         </div>
 
+        {kind === "pilot" && (<>
         <div>
           <label htmlFor="city" className={labelClass}>
             Town or city <span className="text-brand">*</span>
@@ -298,6 +317,8 @@ export function PilotForm({ source = "home", buttonText = "Start a 14-day pilot"
           </select>
         </div>
 
+        </>)}
+
         <div className="sm:col-span-2">
           <label htmlFor="notes" className={labelClass}>
             Anything else we should know?{" "}
@@ -328,7 +349,7 @@ export function PilotForm({ source = "home", buttonText = "Start a 14-day pilot"
         {submitting ? "Sending…" : buttonText}
       </Button>
       <p className="mt-3 text-xs text-muted-foreground">
-        {kind === "pilot" ? "£0 setup for founding customers. Fair-use terms apply." : "We'll get in touch to arrange a demo. No public demo number is available yet."}
+        {kind === "pilot" ? "£0 setup. 7-day pilot. Pricing agreed before you go live." : "We'll get in touch to arrange your demo."}
       </p>
     </form>
   );
