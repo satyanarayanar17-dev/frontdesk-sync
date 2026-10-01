@@ -53,7 +53,7 @@ function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-muted/40 px-4">
       <div className="w-full max-w-sm rounded-2xl border border-border bg-card p-8 shadow-sm">
         <Link to="/" className="text-sm font-bold tracking-tight">
-          FrontDesk <span className="font-medium text-muted-foreground">for Trades</span>
+          FrontDesk <span className="font-medium text-muted-foreground">Ops</span>
         </Link>
         <h1 className="mt-6 text-xl font-semibold">Owner sign-in</h1>
         {state === "sent" ? (
