@@ -57,7 +57,7 @@ const labelClass = "mb-1.5 block text-sm font-medium text-foreground";
 
 const errorClass = "mt-1.5 text-xs text-destructive";
 
-export function PilotForm({ source = "home", buttonText = "Start the 7-day Pilot", kind = "pilot" }: { source?: "home" | "dental" | "trades" | "demo"; buttonText?: string | undefined; kind?: "pilot" | "demo" }) {
+export function PilotForm({ source = "home", buttonText = "Request Pilot Access", kind = "pilot" }: { source?: "home" | "dental" | "trades" | "demo"; buttonText?: string | undefined; kind?: "pilot" | "demo" }) {
   const [fields, setFields] = useState<Fields>(EMPTY);
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
@@ -119,10 +119,10 @@ export function PilotForm({ source = "home", buttonText = "Start the 7-day Pilot
           </svg>
         </div>
         <h3 className="mt-5 text-xl font-semibold">
-          {kind === "demo" ? "Thanks — we’ll be in touch to arrange your FrontDesk demo." : "Thanks — we’ve received your 7-day pilot enquiry."}
+          {kind === "demo" ? "Thanks — we’ve received your demo access request." : "Thanks — we’ve received your pilot access request."}
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          {kind === "demo" ? "We’ll contact you using the details you provided." : "We’ll be in touch to discuss your setup."}
+          We’ll contact you using the details you provided when the relevant early-access place is available.
         </p>
         <Button
           type="button"
@@ -349,7 +349,7 @@ export function PilotForm({ source = "home", buttonText = "Start the 7-day Pilot
         {submitting ? "Sending…" : buttonText}
       </Button>
       <p className="mt-3 text-xs text-muted-foreground">
-        {kind === "pilot" ? "£0 setup. Free 7-day pilot. Plans from £149/month afterwards; your exact price is agreed before you go live." : "We'll get in touch to arrange your demo."}
+        {kind === "pilot" ? "Planned offer: £0 setup and a free 7-day pilot. Indicative plans start at £149/month afterwards. No payment is taken on this website." : "This registers your interest; demo access is not yet live."}
       </p>
       <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
         By submitting, you’re asking FrontDesk to contact you about this request. Read our{" "}
