@@ -21,7 +21,7 @@ export function LeadPreview() { return <div className="w-full max-w-md border bo
 /** Live demo panel. Shows "coming shortly" until a number is set in demo-config. */
 export function DemoPanel({ vertical, prompts, note, primary = false }: { vertical: "dental" | "trades"; prompts: string[]; note?: ReactNode; primary?: boolean }) {
   const label = vertical === "dental" ? "Dental" : "Trades";
-  const number = DEMO_NUMBERS[vertical];
+  const number = DEMO_NUMBERS[vertical]?.trim() || null;
   return <article className={`flex flex-col border bg-card p-7 sm:p-9 ${primary ? "border-2 border-primary" : "border-border"}`}><div className="flex flex-wrap items-center justify-between gap-3"><p className="text-xs font-bold tracking-[0.14em] text-brand">FRONTDESK {label.toUpperCase()} DEMO</p><span className="bg-brand-soft px-2 py-1 text-xs font-bold text-brand">{number ? "Live now" : `Live ${label} demo — coming shortly`}</span></div><h3 className="mt-5 text-2xl font-bold">Try asking:</h3><ul className="mt-5 flex-1 space-y-3">{prompts.map(p => <li key={p} className="border-l-2 border-brand bg-muted/50 px-4 py-3 text-sm font-semibold">“{p}”</li>)}</ul>{note && <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{note}</p>}<div className="mt-7">{number ? <Button asChild size="lg" className="w-full sm:w-auto"><a href={`tel:${number.replace(/\s/g, "")}`}><Phone /> Call FrontDesk {label} — {number}</a></Button> : <Action to="/demo" hash="request-demo">Get the Demo Number</Action>}</div></article>;
 }
 export const DENTAL_PROMPTS = ["Are you accepting new patients?", "I'd like a cosmetic consultation.", "Can I request an appointment next Tuesday afternoon?", "What time do you close?", "I have a clinical question."];
