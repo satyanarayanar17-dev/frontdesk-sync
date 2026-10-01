@@ -12,7 +12,15 @@ function Privacy() {
   return <Marketing>
     <section className="mx-auto max-w-3xl px-5 py-16 sm:px-8 sm:py-20"><p className="text-xs font-bold uppercase tracking-[0.14em] text-brand">Privacy</p><h1 className="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl">How we handle information.</h1><p className="mt-6 text-lg leading-relaxed text-muted-foreground">A plain-language summary. This page doesn't replace any agreement between FrontDesk and a customer business.</p>
       <div className="mt-12 space-y-10">{sections.map(([h, p]) => <div key={h}><h2 className="text-xl font-bold">{h}</h2><p className="mt-3 leading-relaxed text-muted-foreground">{p}</p></div>)}</div>
-      {/* TODO: add legal entity name, registered address and dedicated privacy contact email once confirmed. */}
+      {/*
+        LAUNCH-BLOCKING PRIVACY TODO — do not invent these details.
+        Add the confirmed controller/legal name and contact details; registered or
+        correspondence address where applicable; lawful basis for each processing
+        purpose; recipients/processors; international transfers and safeguards;
+        retention periods; applicable data-subject rights and ICO complaint wording;
+        the call recording/transcription policy; and the approach to any
+        special-category health data before production customer call handling.
+      */}
     </section>
   </Marketing>;
 }

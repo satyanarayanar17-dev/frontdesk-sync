@@ -349,7 +349,14 @@ export function PilotForm({ source = "home", buttonText = "Start the 7-day Pilot
         {submitting ? "Sending…" : buttonText}
       </Button>
       <p className="mt-3 text-xs text-muted-foreground">
-        {kind === "pilot" ? "£0 setup. 7-day pilot. Pricing agreed before you go live." : "We'll get in touch to arrange your demo."}
+        {kind === "pilot" ? "£0 setup. Free 7-day pilot. Plans from £149/month afterwards; your exact price is agreed before you go live." : "We'll get in touch to arrange your demo."}
+      </p>
+      <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+        By submitting, you’re asking FrontDesk to contact you about this request. Read our{" "}
+        <a href="/privacy" className="font-medium underline underline-offset-2 hover:text-foreground">
+          privacy summary
+        </a>
+        .
       </p>
     </form>
   );
