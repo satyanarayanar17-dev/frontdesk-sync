@@ -36,8 +36,8 @@ function SummaryPanel() {
       <figcaption className="text-xs font-bold uppercase tracking-[0.1em]">Illustrative example — live demos in preparation</figcaption>
     </div>
     <div className="p-5 sm:p-6">
-      <ol aria-label="How an enquiry is handled" className="flex items-center gap-2 text-sm font-semibold">
-        {flow.map(({ icon: Icon, label }, i) => <li key={label} className="flex min-w-0 items-center gap-2">{i > 0 && <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />}<span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand"><Icon className="size-4" aria-hidden /></span><span className="truncate">{label}</span></li>)}
+      <ol aria-label="How an enquiry is handled" className="flex flex-wrap items-center gap-x-2 gap-y-2 text-sm font-semibold">
+        {flow.map(({ icon: Icon, label }, i) => <li key={label} className="flex min-w-0 items-center gap-2">{i > 0 && <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />}<span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand"><Icon className="size-4" aria-hidden /></span><span>{label}</span></li>)}
       </ol>
       <div role="tablist" aria-label="Example sector" className="mt-6 inline-flex border border-border bg-muted/50 p-1">
         {tabs.map((t, i) => <button key={t.id} ref={(el) => { refs.current[i] = el; }} id={`tab-${t.id}`} role="tab" type="button" aria-selected={tab === t.id} aria-controls="example-panel" tabIndex={tab === t.id ? 0 : -1} onKeyDown={(e) => onKey(e, i)} onClick={() => setTab(t.id)} className={`px-4 py-1.5 text-sm font-semibold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${tab === t.id ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}>{t.label}</button>)}
@@ -53,7 +53,7 @@ function SummaryPanel() {
 
 function Home() {
   return <Marketing>
-    <section className="border-b border-border"><div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-10 sm:px-8 sm:py-12 lg:grid-cols-2 lg:gap-14">
+    <section className="border-b border-border"><div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-10 sm:px-8 sm:py-12 lg:grid-cols-2 lg:gap-14 [&>*]:min-w-0">
       <div>
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand">AI reception support for dental practices and trades</p>
         <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-[3.4rem]">Busy team.<br />Keep the enquiry.</h1>
