@@ -3,6 +3,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { friendlyError, getSupabase, isOwnerEmail } from "@/lib/supabase";
 
 export const Route = createFileRoute("/login")({
+  staticData: { sitemap: false },
   ssr: false,
   head: () => ({
     meta: [

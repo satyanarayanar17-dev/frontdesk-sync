@@ -6,7 +6,8 @@ import { useLiveTable } from "@/hooks/use-live-table";
 import { checkWebhookHealth } from "@/lib/health.functions";
 import { fmtTime, label, LEAD_STATUSES, URGENCIES, type Lead } from "@/lib/supabase";
 
-export const Route = createFileRoute("/dashboard/leads")({ component: LeadsPage });
+export const Route = createFileRoute("/dashboard/leads")({
+  staticData: { sitemap: false }, component: LeadsPage });
 
 const urgencyClass = (u?: string | null) =>
   u === "emergency"

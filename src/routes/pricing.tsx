@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Marketing, Meta, Action, pageHead } from "@/components/Marketing";
-export const Route = createFileRoute("/pricing")({ head: () => pageHead("FrontDesk Pre-launch Pricing | Planned 7-day pilot", "Register interest in the planned FrontDesk pilot. Indicative plans start at £149/month after the pilot; no payment is taken through this website."), component: Pricing });
+export const Route = createFileRoute("/pricing")({
+  staticData: { sitemap: true }, head: () => pageHead("FrontDesk Pre-launch Pricing | Planned 7-day pilot", "Register interest in the planned FrontDesk pilot. Indicative plans start at £149/month after the pilot; no payment is taken through this website."), component: Pricing });
 const factors = [["Call volume", "How many calls you'd like FrontDesk to handle."], ["Workflow complexity", "The questions, capture fields and escalation rules you need."], ["Locations and numbers", "How many sites or phone numbers are covered."], ["Configuration", "Any specific setup your team requires."]];
 const included = ["Setup based on your business information", "Answering routine enquiries with approved information", "Capture of caller details and enquiry reason", "Flags for urgent or sensitive calls under your rules", "Structured summaries for your team", "Your existing number kept — calls forwarded when needed"];
 function Pricing() {

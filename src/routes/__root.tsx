@@ -74,6 +74,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { charSet: "utf-8" },

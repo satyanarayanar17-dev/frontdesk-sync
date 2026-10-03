@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useLiveTable } from "@/hooks/use-live-table";
 import { fmtTime, label, PILOT_STATUSES, type PilotInterest } from "@/lib/supabase";
 
-export const Route = createFileRoute("/dashboard/pilots")({ component: PilotsPage });
+export const Route = createFileRoute("/dashboard/pilots")({
+  staticData: { sitemap: false }, component: PilotsPage });
 
 function PilotsPage() {
   const { rows, loading, error, realtime, reload, updateStatus } = useLiveTable<PilotInterest>("frontdesk_pilot_interests");

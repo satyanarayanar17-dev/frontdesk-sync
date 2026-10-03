@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Marketing, Meta, Action, RequestSection, pageHead } from "@/components/Marketing";
-export const Route = createFileRoute("/")({ head: () => pageHead("FrontDesk | AI reception support for UK dental practices", "Dental reception overflow and out-of-hours call handling for UK practices. FrontDesk captures routine enquiries and appointment requests for staff to follow up. 7-day pilot, £0 setup."), component: Home });
+export const Route = createFileRoute("/")({
+  staticData: { sitemap: true }, head: () => pageHead("FrontDesk | AI reception support for UK dental practices", "Dental reception overflow and out-of-hours call handling for UK practices. FrontDesk captures routine enquiries and appointment requests for staff to follow up. 7-day pilot, £0 setup."), component: Home });
 
 const summary = [["Caller", "New patient · Mr J. Patel"], ["Reason", "Cosmetic consultation enquiry"], ["Preferred time", "Tuesday afternoon"], ["Status", "Appointment request — not confirmed"], ["Next step", "Reception to call back"]];
 

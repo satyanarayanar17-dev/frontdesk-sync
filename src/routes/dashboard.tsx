@@ -2,6 +2,7 @@ import { createFileRoute, Link, Outlet, redirect, useNavigate } from "@tanstack/
 import { getSupabase, isOwnerEmail } from "@/lib/supabase";
 
 export const Route = createFileRoute("/dashboard")({
+  staticData: { sitemap: "exclude-subtree" },
   ssr: false,
   head: () => ({
     meta: [
