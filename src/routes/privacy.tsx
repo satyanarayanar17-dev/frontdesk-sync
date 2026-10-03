@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Marketing, pageHead } from "@/components/Marketing";
 
 export const Route = createFileRoute("/privacy")({
+  staticData: { sitemap: true },
   head: () =>
     pageHead(
       "Pre-launch Privacy Notice | FrontDesk",

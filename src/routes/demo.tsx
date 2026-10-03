@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Marketing, DemoPanel, RequestSection, pageHead, DENTAL_PROMPTS, DENTAL_PROMPT_NOTE, TRADES_PROMPTS } from "@/components/Marketing";
-export const Route = createFileRoute("/demo")({ head: () => pageHead("FrontDesk Demo Early Access | Dental and trades", "Register interest in FrontDesk Dental or Trades demo access. The demo lines are currently in preparation."), component: Demo });
+export const Route = createFileRoute("/demo")({
+  staticData: { sitemap: true }, head: () => pageHead("FrontDesk Demo Early Access | Dental and trades", "Register interest in FrontDesk Dental or Trades demo access. The demo lines are currently in preparation."), component: Demo });
 function Demo() {
   return <Marketing>
     <section className="border-b border-border"><div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20"><p className="text-xs font-bold uppercase tracking-[0.14em] text-brand">Demo early access</p><h1 className="mt-5 max-w-4xl text-4xl font-extrabold leading-[1.08] sm:text-6xl">Hear FrontDesk before you decide.</h1><p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">The demo lines are in preparation. See what you'll be able to ask, then register for access below.</p></div></section>
