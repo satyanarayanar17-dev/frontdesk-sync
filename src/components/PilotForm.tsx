@@ -119,10 +119,10 @@ export function PilotForm({ source = "home", buttonText = "Request Pilot Access"
           </svg>
         </div>
         <h3 className="mt-5 text-xl font-semibold">
-          {kind === "demo" ? "Thanks — we’ve received your demo access request." : "Thanks — we’ve received your pilot access request."}
+          {kind === "demo" ? "Thanks — we’ve received your demo request." : "Thanks — we’ve received your pilot request."}
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          We’ll contact you using the details you provided when the relevant early-access place is available.
+          We’ll contact you using the details you provided to discuss the next steps.
         </p>
         <Button
           type="button"
@@ -349,7 +349,7 @@ export function PilotForm({ source = "home", buttonText = "Request Pilot Access"
         {submitting ? "Sending…" : buttonText}
       </Button>
       <p className="mt-3 text-xs text-muted-foreground">
-        {kind === "pilot" ? "Planned offer: £0 setup and a free 7-day pilot. Indicative plans start at £149/month afterwards. No payment is taken on this website." : "This registers your interest; demo access is not yet live."}
+        {kind === "pilot" ? "Pilot offer: £0 setup and a free 7-day pilot. Indicative plans start at £149/month afterwards. No payment is taken on this website." : "We’ll contact you to arrange a demo tailored to your business. No public demo number is available on this page."}
       </p>
       <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
         By submitting, you’re asking FrontDesk to contact you about this request. Read our{" "}

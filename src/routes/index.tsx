@@ -33,7 +33,7 @@ function SummaryPanel() {
   };
   return <figure className="border border-border bg-card shadow-xl shadow-primary/10">
     <div className="flex items-center justify-between gap-3 bg-brand-ink px-5 py-4 text-primary-foreground sm:px-6">
-      <figcaption className="text-xs font-bold uppercase tracking-[0.1em]">Illustrative example — live demos in preparation</figcaption>
+      <figcaption className="text-xs font-bold uppercase tracking-[0.1em]">Illustrative example — demos arranged on request</figcaption>
     </div>
     <div className="p-5 sm:p-6">
       <ol aria-label="How an enquiry is handled" className="flex flex-wrap items-center gap-x-2 gap-y-2 text-sm font-semibold">
@@ -58,7 +58,7 @@ function Home() {
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand">AI reception support for dental practices and trades</p>
         <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-[3.4rem]">Busy team.<br />Keep the enquiry.</h1>
         <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">We’re developing FrontDesk AI to capture enquiries and callback details when your team can’t answer. Your team stays in control of appointments, visits and follow-up.</p>
-        <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center"><Action to="/demo">Request Demo Access</Action><a href="#sectors" className="inline-flex items-center gap-1 self-start rounded-sm text-sm font-semibold text-brand underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:self-auto">Explore your business <ArrowDown className="size-4" aria-hidden /></a></div>
+        <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center"><Action to="/demo">Request a Demo</Action><a href="#sectors" className="inline-flex items-center gap-1 self-start rounded-sm text-sm font-semibold text-brand underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:self-auto">Explore your business <ArrowDown className="size-4" aria-hidden /></a></div>
         <p className="mt-6 text-sm font-semibold">7-day free pilot · Zero setup fee</p>
         <p className="mt-1 text-sm text-muted-foreground">Pilot access follows call-flow agreement and testing.</p>
       </div>
@@ -74,6 +74,6 @@ function Home() {
 
     <section className="border-y border-border bg-muted/40"><div className="mx-auto max-w-7xl px-5 py-14 sm:px-8"><Meta eyebrow="How a pilot works" title="Agree. Test. Follow up." /><ol className="mt-8 grid gap-8 md:grid-cols-3">{["Agree the enquiries and questions to capture.", "Test the call flow and summary destination.", "Let your team review enquiries and follow up."].map((t, i) => <li key={t}><span className="text-sm font-bold text-brand">0{i + 1}</span><p className="mt-3 text-lg font-semibold">{t}</p></li>)}</ol><div className="mt-8"><Link to="/how-it-works" className="inline-flex items-center gap-1 rounded-sm text-sm font-semibold text-brand underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">See how it works <ArrowRight className="size-4" aria-hidden /></Link></div></div></section>
 
-    <div id="pilot"><RequestSection source="home" title="Explore a pilot for your business." buttonText="Request Pilot Access" /></div>
+    <div id="pilot"><RequestSection source="home" title="See what FrontDesk could handle for you." buttonText="Request Pilot Access" /></div>
   </Marketing>;
 }

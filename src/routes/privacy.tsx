@@ -6,8 +6,8 @@ export const Route = createFileRoute("/privacy")({
   staticData: { sitemap: true },
   head: () =>
     pageHead(
-      "Pre-launch Privacy Notice | FrontDesk",
-      "How FrontDesk handles information submitted through its pre-launch demo and pilot interest forms.",
+      "Privacy Notice | FrontDesk",
+      "How FrontDesk handles information submitted through its demo and pilot enquiry forms.",
     ),
   component: Privacy,
 });
@@ -15,11 +15,11 @@ export const Route = createFileRoute("/privacy")({
 const sections: [string, string][] = [
   [
     "Who operates FrontDesk",
-    "FrontDesk is a trading name of T Satya Narayana Reddy, a sole proprietor based in India. For this pre-launch website, T Satya Narayana Reddy is responsible for deciding how enquiry information is used.",
+    "FrontDesk is a trading name of T Satya Narayana Reddy, a sole proprietor based in India. For this website, T Satya Narayana Reddy is responsible for deciding how enquiry information is used.",
   ],
   [
-    "Pre-launch scope",
-    "This website is currently registering interest in future demos and pilot places. FrontDesk is not taking payment through this website and is not currently using this website to activate customer call handling.",
+    "Scope of this notice",
+    "This website accepts requests for arranged demos and discussions about tailored 7-day pilots. FrontDesk does not take payment or activate customer call handling through this website; setup and service terms are agreed separately.",
   ],
   [
     "What we collect",
@@ -27,7 +27,7 @@ const sections: [string, string][] = [
   ],
   [
     "Why we use it",
-    "We use enquiry details to respond to your request, understand potential demand and discuss possible demo or pilot access. We rely on taking steps at your request before a possible service agreement and on our legitimate interest in responding to relevant business enquiries. We do not sell your information.",
+    "We use enquiry details to respond to your request, understand your business needs and discuss a demo or pilot. We rely on taking steps at your request before a possible service agreement and on our legitimate interest in responding to relevant business enquiries. We do not sell your information.",
   ],
   [
     "Storage, service providers and international access",
@@ -35,7 +35,7 @@ const sections: [string, string][] = [
   ],
   [
     "How long we keep it",
-    "We aim to delete an inactive pre-launch enquiry within 12 months of the last contact, unless we need to keep it for an ongoing discussion, a legal requirement or the handling of a dispute. You can ask us to delete it sooner where applicable.",
+    "We aim to delete an inactive enquiry within 12 months of the last contact, unless we need to keep it for an ongoing discussion, a legal requirement or the handling of a dispute. You can ask us to delete it sooner where applicable.",
   ],
   [
     "Your choices and rights",
@@ -47,7 +47,7 @@ const sections: [string, string][] = [
   ],
   [
     "Future customer call handling",
-    "Before any live dental or trades call handling begins, FrontDesk and the customer business will agree the required processing terms, caller notices, recording and transcription choices, retention rules, international-transfer safeguards and protections for any sensitive information. Customer call data is outside the scope of this pre-launch notice.",
+    "Before live dental or trades call handling begins for a customer, FrontDesk and the customer business will agree the required processing terms, caller notices, recording and transcription choices, retention rules, international-transfer safeguards and protections for any sensitive information. Customer call data is outside the scope of this website enquiry notice.",
   ],
 ];
 
@@ -56,13 +56,13 @@ function Privacy() {
     <Marketing>
       <section className="mx-auto max-w-3xl px-5 py-16 sm:px-8 sm:py-20">
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand">
-          Pre-launch privacy notice
+          Website privacy notice
         </p>
         <h1 className="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl">
           How we handle website enquiries.
         </h1>
         <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-          This notice covers information submitted through the FrontDesk pre-launch website. Last
+          This notice covers information submitted through the FrontDesk website. Last
           updated 1 October 2026.
         </p>
         <div className="mt-12 space-y-10">
