@@ -33,7 +33,7 @@ function SummaryPanel() {
   };
   return <figure className="border border-border bg-card shadow-xl shadow-primary/10">
     <div className="flex items-center justify-between gap-3 bg-brand-ink px-5 py-4 text-primary-foreground sm:px-6">
-      <figcaption className="text-xs font-bold uppercase tracking-[0.1em]">Illustrative example — live demos in preparation</figcaption>
+      <figcaption className="text-xs font-bold uppercase tracking-[0.1em]">Illustrative example — demos arranged on request</figcaption>
     </div>
     <div className="p-5 sm:p-6">
       <ol aria-label="How an enquiry is handled" className="flex flex-wrap items-center gap-x-2 gap-y-2 text-sm font-semibold">
