@@ -1,4 +1,5 @@
 # Callwoven marketing update
+- [ ] Refine logo fidelity and placement; redesign homepage inspired by frontdeskassist.com (awaiting visual choices).
 - [x] Rebrand public pages, logo, favicon and metadata while preserving operations.
 - [x] Implement reference-inspired homepage, equal sectors, pilot process, sample summary, FAQ and existing enquiry form.
 - [x] Verify layouts, keyboard controls, links, form behaviour and preview diagnostics; do not publish or change DNS.
