@@ -7,10 +7,10 @@ export const Route = createFileRoute("/login")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Owner login — FrontDesk" },
-      { name: "description", content: "Owner sign-in for the FrontDesk operations dashboard." },
-      { property: "og:title", content: "Owner login — FrontDesk" },
-      { property: "og:description", content: "Owner sign-in for the FrontDesk operations dashboard." },
+      { title: "Owner login — Callwoven" },
+      { name: "description", content: "Owner sign-in for the Callwoven operations dashboard." },
+      { property: "og:title", content: "Owner login — Callwoven" },
+      { property: "og:description", content: "Owner sign-in for the Callwoven operations dashboard." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
@@ -54,7 +54,7 @@ function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-muted/40 px-4">
       <div className="w-full max-w-sm rounded-2xl border border-border bg-card p-8 shadow-sm">
         <Link to="/" className="text-sm font-bold tracking-tight">
-          FrontDesk <span className="font-medium text-muted-foreground">Ops</span>
+          Callwoven <span className="font-medium text-muted-foreground">Ops</span>
         </Link>
         <h1 className="mt-6 text-xl font-semibold">Owner sign-in</h1>
         {state === "sent" ? (

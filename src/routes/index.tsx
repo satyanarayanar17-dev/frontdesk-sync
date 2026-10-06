@@ -1,79 +1,56 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useRef, useState, type KeyboardEvent } from "react";
-import { ArrowDown, ArrowRight, ClipboardList, Phone, Stethoscope, UserRoundCheck, Wrench } from "lucide-react";
-import { Marketing, Meta, Action, RequestSection, pageHead } from "@/components/Marketing";
+import { ArrowRight, ClipboardList, Phone, Stethoscope, UserRoundCheck, Wrench, MessagesSquare, FlaskConical, ChevronDown, Check } from "lucide-react";
+import { Marketing, Action, RequestSection, pageHead } from "@/components/Marketing";
+import { Button } from "@/components/ui/button";
+import ribbon from "@/assets/callwoven-ribbon.png";
 
 export const Route = createFileRoute("/")({
-  staticData: { sitemap: true },
-  head: () => pageHead("FrontDesk | AI reception support for dental practices and trades", "FrontDesk AI is being developed to capture enquiries and callback details for UK dental practices and trades businesses when the team can’t answer. 7-day free pilot, zero setup fee."),
-  component: Home,
+ staticData: { sitemap: true },
+ head: () => pageHead("Callwoven | AI reception for dental practices and service trades", "AI reception support for dental practices and service businesses. Discuss a 7-day free pilot with zero setup fee; your team stays in control."),
+ component: Home,
 });
-
 const examples = {
-  dental: [["Enquiry", "New-patient appointment request"], ["Callback preference", "Tuesday afternoon"], ["Next step", "Reception to call back"], ["Status", "Appointment not confirmed"]],
-  trades: [["Enquiry", "Boiler service request"], ["Callback preference", "Tomorrow morning"], ["Next step", "Team to call back"], ["Status", "Visit not confirmed"]],
+ dental: [["Caller", "Alex Morgan"], ["Enquiry", "New-patient appointment request"], ["Requested callback", "Tuesday afternoon"], ["Next step", "Reception to call back"]],
+ trades: [["Caller", "Jamie Taylor"], ["Enquiry", "Boiler service request"], ["Requested callback", "Tomorrow morning"], ["Next step", "Team to call back"]],
 } as const;
-type Tab = keyof typeof examples;
-const tabs: { id: Tab; label: string }[] = [{ id: "dental", label: "Dental" }, { id: "trades", label: "Trades" }];
-const flow = [{ icon: Phone, label: "Enquiry" }, { icon: ClipboardList, label: "Details" }, { icon: UserRoundCheck, label: "Team follow-up" }];
-
-function SummaryPanel() {
-  const [tab, setTab] = useState<Tab>("dental");
-  const refs = useRef<(HTMLButtonElement | null)[]>([]);
-  const onKey = (e: KeyboardEvent, i: number) => {
-    let n = -1;
-    if (e.key === "ArrowRight") n = (i + 1) % tabs.length;
-    else if (e.key === "ArrowLeft") n = (i - 1 + tabs.length) % tabs.length;
-    else if (e.key === "Home") n = 0;
-    else if (e.key === "End") n = tabs.length - 1;
-    if (n < 0) return;
-    e.preventDefault();
-    setTab(tabs[n]!.id);
-    refs.current[n]?.focus();
-  };
-  return <figure className="border border-border bg-card shadow-xl shadow-primary/10">
-    <div className="flex items-center justify-between gap-3 bg-brand-ink px-5 py-4 text-primary-foreground sm:px-6">
-      <figcaption className="text-xs font-bold uppercase tracking-[0.1em]">Illustrative example — demos arranged on request</figcaption>
-    </div>
-    <div className="p-5 sm:p-6">
-      <ol aria-label="How an enquiry is handled" className="flex flex-wrap items-center gap-x-2 gap-y-2 text-sm font-semibold">
-        {flow.map(({ icon: Icon, label }, i) => <li key={label} className="flex min-w-0 items-center gap-2">{i > 0 && <ArrowRight className="size-4 shrink-0 text-muted-foreground" aria-hidden />}<span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand"><Icon className="size-4" aria-hidden /></span><span>{label}</span></li>)}
-      </ol>
-      <div role="tablist" aria-label="Example sector" className="mt-6 inline-flex border border-border bg-muted/50 p-1">
-        {tabs.map((t, i) => <button key={t.id} ref={(el) => { refs.current[i] = el; }} id={`tab-${t.id}`} role="tab" type="button" aria-selected={tab === t.id} aria-controls="example-panel" tabIndex={tab === t.id ? 0 : -1} onKeyDown={(e) => onKey(e, i)} onClick={() => setTab(t.id)} className={`px-4 py-1.5 text-sm font-semibold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${tab === t.id ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}>{t.label}</button>)}
-      </div>
-      <div id="example-panel" role="tabpanel" aria-labelledby={`tab-${tab}`} className="mt-4 border border-border bg-background p-4 sm:p-5">
-        <p className="font-display text-sm font-bold">Callback summary</p>
-        <dl className="mt-3 space-y-2.5 text-sm">{examples[tab].map(([k, v]) => <div key={k} className="grid grid-cols-[130px_1fr] gap-2 sm:grid-cols-[160px_1fr]"><dt className="text-muted-foreground">{k}</dt><dd className="font-semibold">{v}</dd></div>)}</dl>
-      </div>
-      <p className="mt-3 text-xs text-muted-foreground">Fictional example — not a real customer or patient record.</p>
-    </div>
-  </figure>;
+type Sector = keyof typeof examples;
+const tabs: {id: Sector; label: string}[] = [{id:"dental",label:"Dental"},{id:"trades",label:"Trades"}];
+function EnquiryCard({ compact = false }: { compact?: boolean }) {
+ const [sector, setSector] = useState<Sector>("dental");
+ const refs = useRef<(HTMLButtonElement | null)[]>([]);
+ const key = (e: KeyboardEvent, i: number) => {
+  const n = e.key === "ArrowRight" ? (i + 1) % 2 : e.key === "ArrowLeft" ? (i + 1) % 2 : e.key === "Home" ? 0 : e.key === "End" ? 1 : -1;
+  const next = tabs[n]; if (!next) return; e.preventDefault(); setSector(next.id); refs.current[n]?.focus();
+ };
+ const prefix = compact ? "hero" : "received";
+ return <figure className={`relative rounded-lg border border-border bg-card woven-shadow ${compact ? "w-full max-w-[350px] p-5 sm:p-6" : "w-full max-w-lg p-6 sm:p-8"}`}>
+ <figcaption className="text-xs text-muted-foreground">{compact ? "Illustrative example" : "Illustrative example — fictional details"}</figcaption>
+ <div className="mt-4 flex items-center gap-3 border-b border-border pb-5"><span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-secondary"><ClipboardList className="size-5" aria-hidden /></span><p className="text-base font-semibold">Callback requested</p></div>
+ <div role="tablist" aria-label="Example business type" className="mt-4 flex gap-2">{tabs.map((t,i) => <Button key={t.id} ref={el => {refs.current[i] = el;}} id={`${prefix}-${t.id}`} role="tab" type="button" variant={sector === t.id ? "secondary" : "ghost"} size="sm" aria-selected={sector === t.id} aria-controls={`${prefix}-summary`} tabIndex={sector === t.id ? 0 : -1} onKeyDown={e => key(e,i)} onClick={() => setSector(t.id)}>{t.label}</Button>)}</div>
+ <div id={`${prefix}-summary`} role="tabpanel" aria-labelledby={`${prefix}-${sector}`}><dl className="mt-4 space-y-4 text-[13px]">{examples[sector].map(([k,v]) => <div key={k} className="grid grid-cols-[105px_1fr] gap-3"><dt className="text-muted-foreground">{k}</dt><dd className="font-medium leading-relaxed">{v}</dd></div>)}</dl><p className="mt-5 flex items-center gap-2 border-t border-border pt-4 text-xs text-copper-ink"><UserRoundCheck className="size-4 shrink-0" aria-hidden />{sector === "dental" ? "Appointment not confirmed" : "Visit not confirmed"}</p></div>
+ {!compact && <p className="mt-4 text-xs leading-relaxed text-muted-foreground">Fictional example — not a real customer or patient record.</p>}
+ </figure>;
 }
-
-function Home() {
-  return <Marketing>
-    <section className="border-b border-border"><div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-10 sm:px-8 sm:py-12 lg:grid-cols-2 lg:gap-14 [&>*]:min-w-0">
-      <div>
-        <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand">AI reception support for dental practices and trades</p>
-        <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-[3.4rem]">Busy team.<br />Keep the enquiry.</h1>
-        <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">We’re developing FrontDesk AI to capture enquiries and callback details when your team can’t answer. Your team stays in control of appointments, visits and follow-up.</p>
-        <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center"><Action to="/demo">Request a Demo</Action><a href="#sectors" className="inline-flex items-center gap-1 self-start rounded-sm text-sm font-semibold text-brand underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:self-auto">Explore your business <ArrowDown className="size-4" aria-hidden /></a></div>
-        <p className="mt-6 text-sm font-semibold">7-day free pilot · Zero setup fee</p>
-        <p className="mt-1 text-sm text-muted-foreground">Pilot access follows call-flow agreement and testing.</p>
-      </div>
-      <SummaryPanel />
-    </div></section>
-
-    <section id="sectors" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-14 sm:px-8"><Meta eyebrow="Who it's for" title="Built around your business." /><div className="mt-8 grid gap-5 md:grid-cols-2">
-      {[
-        { icon: Stethoscope, title: "For dental practices", copy: "Explore administrative enquiry capture for busy reception teams. Staff confirm appointments and handle clinical questions.", extra: null, to: "/dental" as const, cta: "Explore Dental" },
-        { icon: Wrench, title: "For trades businesses", copy: "Explore job-enquiry and callback capture while your team is on site. Staff confirm visits, quotes and availability.", extra: "Plumbing · Heating/HVAC · Electrical", to: "/trades" as const, cta: "Explore Trades" },
-      ].map(({ icon: Icon, title, copy, extra, to, cta }) => <article key={title} className="flex flex-col justify-between border border-border bg-card p-7 shadow-sm transition-shadow hover:shadow-lg hover:shadow-primary/10 motion-reduce:transition-none sm:p-8"><div><span className="flex size-11 items-center justify-center bg-brand-ink text-primary-foreground"><Icon className="size-5" aria-hidden /></span><h3 className="mt-6 text-2xl font-bold">{title}</h3><p className="mt-3 leading-relaxed text-muted-foreground">{copy}</p>{extra && <p className="mt-3 text-sm font-semibold">{extra}</p>}</div><div className="mt-8"><Action to={to}>{cta}</Action></div></article>)}
-    </div></section>
-
-    <section className="border-y border-border bg-muted/40"><div className="mx-auto max-w-7xl px-5 py-14 sm:px-8"><Meta eyebrow="How a pilot works" title="Agree. Test. Follow up." /><ol className="mt-8 grid gap-8 md:grid-cols-3">{["Agree the enquiries and questions to capture.", "Test the call flow and summary destination.", "Let your team review enquiries and follow up."].map((t, i) => <li key={t}><span className="text-sm font-bold text-brand">0{i + 1}</span><p className="mt-3 text-lg font-semibold">{t}</p></li>)}</ol><div className="mt-8"><Link to="/how-it-works" className="inline-flex items-center gap-1 rounded-sm text-sm font-semibold text-brand underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">See how it works <ArrowRight className="size-4" aria-hidden /></Link></div></div></section>
-
-    <div id="pilot"><RequestSection source="home" title="See what FrontDesk could handle for you." buttonText="Request Pilot Access" /></div>
-  </Marketing>;
-}
+const sectors = [
+ {icon:Stethoscope, title:"Dental practices",copy:"Keep administrative enquiries moving while reception is busy.", examples:"New-patient enquiries · Appointment requests · Callback details", note:"Your staff confirm appointments and handle clinical questions.", to:"/dental" as const},
+ {icon:Wrench,title:"Trades & service businesses",copy:"Capture enquiries while your team is on the job.",examples:"Plumbing · Heating / HVAC · Electrical",note:"Your team confirms availability, quotes and next steps.",to:"/trades" as const},
+];
+const questions = [
+ ["Who is Callwoven for?", "Dental practices and service businesses, including plumbing, heating/HVAC and electrical teams, that want to discuss administrative enquiry and callback capture."],
+ ["What details could it capture?", "The agreed call flow can be configured around caller name, contact number, location, reason for calling and a requested callback time. We agree the fields and test them before the pilot."],
+ ["Does it confirm appointments or visits?", "No. Your staff confirm appointments, availability, quotes and next steps. A request is not a confirmed booking."],
+ ["Does it give clinical advice?", "No. Clinical questions, uncertain matters and sensitive enquiries are passed back to your team under your agreed rules."],
+ ["What happens before a pilot starts?", "We agree the scope, call-handling requirements, data handling and service terms, then test the call flow. Live demos are in preparation; no public live demo is available yet."],
+];
+function Home() {return <Marketing>
+ <section className="relative"><div className="mx-auto grid max-w-7xl items-center gap-7 px-5 pb-9 pt-12 sm:px-8 sm:pt-14 lg:grid-cols-[1.05fr_1fr] lg:gap-7 lg:pb-10 lg:pt-14">
+ <div className="relative z-10 min-w-0"><p className="text-[11px] font-medium uppercase text-muted-foreground">AI reception. Human follow-through.</p><h1 className="mt-5 max-w-xl text-[48px] leading-[1.04] sm:text-[64px] lg:text-[76px]">A clear next step<br className="hidden sm:block"/> for every call<span className="text-copper">.</span></h1><p className="mt-6 max-w-[470px] text-base leading-relaxed text-muted-foreground sm:text-lg">AI reception support for dental practices and service businesses. Capture administrative enquiries and callback requests when your team is busy.</p><div className="mt-7 flex flex-col gap-3 sm:flex-row"><Action to="/" hash="pilot">Discuss a free pilot</Action><Action to="/how-it-works" secondary>See how it works</Action></div><p className="mt-5 text-xs font-medium text-muted-foreground">7-day free pilot · Zero setup fee</p><p className="mt-1 text-xs text-muted-foreground">Pilot access follows call-flow agreement and testing.</p></div>
+ <div className="relative flex min-h-[410px] min-w-0 items-center justify-center sm:min-h-[430px] lg:justify-end"><img src={ribbon} width={1536} height={1024} alt="" className="woven-ribbon pointer-events-none absolute left-1/2 top-1/2 w-[125%] max-w-none -translate-x-1/2 -translate-y-1/2" /><div className="relative z-10 w-full max-w-[350px] lg:mr-3"><EnquiryCard compact /></div></div>
+ </div><div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 pb-8 text-xs text-muted-foreground sm:px-8"><p>Built around your team. Not a replacement for it.</p><p>Dental practices & service trades</p></div></section>
+ <section id="sectors" className="mx-auto grid max-w-7xl gap-5 px-5 pb-16 sm:px-8 md:grid-cols-2">{sectors.map(({icon:Icon,title,copy,examples,note,to},i) => <article key={to} className={`group flex flex-col rounded-lg border p-6 sm:p-7 ${i === 0 ? "border-border bg-secondary/60" : "border-copper/25 bg-accent/50"}`}><div className="flex items-center gap-4"><span className={`flex size-14 shrink-0 items-center justify-center rounded-full ${i === 0 ? "bg-secondary" : "bg-accent text-copper-ink"}`}><Icon className="size-7" strokeWidth={1.4} aria-hidden /></span><h2 className="text-[30px] leading-tight">{title}</h2><Button asChild variant="outline" size="icon" className="ml-auto size-10 shrink-0 rounded-full bg-transparent" title={`Explore ${title}`}><a href={to} aria-label={`Explore ${title}`}><ArrowRight /></a></Button></div><p className="mt-5 text-base font-medium">{copy}</p><p className="mt-3 text-xs leading-relaxed text-muted-foreground">{examples}</p>{i === 1 && <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Caller name, contact number, location and reason for calling.</p>}<p className="mt-auto border-t border-foreground/10 pt-4 text-xs leading-relaxed text-muted-foreground">{note}</p></article>)}</section>
+ <section className="border-y border-border bg-secondary/35"><div className="mx-auto max-w-7xl px-5 py-16 sm:px-8"><div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="text-xs font-medium uppercase text-muted-foreground">The proposed pilot process</p><h2 className="mt-4 text-4xl sm:text-5xl">Good conversations.<br/>Clear handovers.</h2></div><p className="max-w-sm text-sm leading-relaxed text-muted-foreground">Start with your requirements, test the details, then review what your team needs to follow up.</p></div><ol className="mt-12 grid gap-8 md:grid-cols-3">{[{icon:MessagesSquare,title:"Agree your requirements",copy:"Decide which enquiries to capture and which calls need a person."},{icon:FlaskConical,title:"Test the call flow",copy:"Review the wording, capture fields and intended summary destination before the pilot."},{icon:UserRoundCheck,title:"Review. Then follow up.",copy:"Your team reviews captured enquiries and decides the next step."}].map(({icon:Icon,title,copy},i) => <li key={title} className="border-t border-border pt-6"><div className="flex items-center justify-between"><Icon className="size-7" strokeWidth={1.4} aria-hidden/><span className="font-display text-2xl text-copper-ink">0{i+1}</span></div><h3 className="mt-5 text-2xl">{title}</h3><p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">{copy}</p></li>)}</ol></div></section>
+ <section className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 lg:grid-cols-2"><div><p className="text-xs font-medium uppercase text-muted-foreground">Incoming enquiry → Details captured → Your team follows up</p><h2 className="mt-5 text-4xl sm:text-5xl">Less searching.<br/>A useful next step.</h2><p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">A concise callback summary, shaped around the information your team needs. Your people stay in control.</p><ul className="mt-7 space-y-4 text-sm">{["Caller details and reason for calling", "Requested callback time", "Appointments and visits confirmed by your staff"].map(t => <li key={t} className="flex items-center gap-3"><Check className="size-4 text-copper-ink" aria-hidden />{t}</li>)}</ul><p className="mt-7 text-xs text-muted-foreground">Illustrative workflow. Live demos are in preparation.</p></div><div className="flex justify-center lg:justify-end"><EnquiryCard /></div></section>
+ <div id="pilot"><RequestSection source="home" title="See whether Callwoven fits your business." intro="Discuss a 7-day free pilot with zero setup fee. We’ll agree the scope and test the call flow before it starts." buttonText="Discuss a free pilot" /></div>
+ <section className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[0.75fr_1.25fr]"><div><p className="text-xs font-medium uppercase text-muted-foreground">A few things worth knowing</p><h2 className="mt-4 text-4xl sm:text-5xl">Clear from<br/>the start.</h2><a href="mailto:satya@callwoven.com" className="mt-5 inline-block text-sm underline underline-offset-4">Ask us a question <ArrowRight className="ml-2 inline size-4" /></a></div><div>{questions.map(([q,a]) => <details key={q} className="group border-b border-border"><summary className="flex cursor-pointer list-none items-center justify-between gap-5 py-5 text-base font-medium">{q}<ChevronDown className="size-4 shrink-0 transition-transform group-open:rotate-180" aria-hidden /></summary><p className="pb-5 text-sm leading-relaxed text-muted-foreground">{a}</p></details>)}</div></section>
+ </Marketing>;}

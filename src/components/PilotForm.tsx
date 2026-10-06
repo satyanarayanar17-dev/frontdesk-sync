@@ -78,8 +78,7 @@ export function PilotForm({ source = "home", buttonText = "Request Pilot Access"
     if (Object.values(nextErrors).some(Boolean)) return;
     setSubmitError(null);
     if (honeypot) {
-      setSubmitted(true); // silently drop bots
-      return;
+      return; // silently drop bots without claiming a successful submission
     }
     setSubmitting(true);
     const t = (v: string) => v.trim() || null;
@@ -103,7 +102,7 @@ export function PilotForm({ source = "home", buttonText = "Request Pilot Access"
 
   if (submitted) {
     return (
-      <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-sm sm:p-10">
+      <div className="rounded-lg border border-border bg-card p-8 text-center shadow-sm sm:p-10">
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-soft">
           <svg
             className="h-6 w-6 text-brand"
@@ -126,11 +125,12 @@ export function PilotForm({ source = "home", buttonText = "Request Pilot Access"
         </p>
         <Button
           type="button"
+          variant="outline"
           onClick={() => {
             setFields(EMPTY);
             setSubmitted(false);
           }}
-          className="mt-6 text-sm font-medium text-brand underline-offset-4 hover:underline"
+          className="mt-6 text-sm font-medium"
         >
           Submit another enquiry
         </Button>
@@ -142,7 +142,7 @@ export function PilotForm({ source = "home", buttonText = "Request Pilot Access"
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="relative rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8"
+      className="relative rounded-lg border border-border bg-card p-6 shadow-sm sm:p-8"
     >
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label>
@@ -239,15 +239,16 @@ export function PilotForm({ source = "home", buttonText = "Request Pilot Access"
           )}
         </div>
 
-        {kind === "demo" && (
+        {(
         <div className="sm:col-span-2">
           <label htmlFor="vertical" className={labelClass}>
-            Which demo? <span className="text-brand">*</span>
+            {kind === "demo" ? "Which demo?" : "Business type (optional)"} {kind === "demo" && <span className="text-brand">*</span>}
           </label>
           <select id="vertical" className={inputClass} value={fields.vertical} onChange={(e) => set("vertical")(e.target.value)} aria-invalid={Boolean(errors.vertical)} aria-describedby={errors.vertical ? "vertical-error" : undefined}>
             <option value="">Select one</option>
             <option value="dental">Dental</option>
             <option value="trades">Trades</option>
+            {kind === "pilot" && <option value="other">Other service business</option>}
           </select>
           {errors.vertical && (<p id="vertical-error" className={errorClass} role="alert">{errors.vertical}</p>)}
         </div>
@@ -352,7 +353,7 @@ export function PilotForm({ source = "home", buttonText = "Request Pilot Access"
         {kind === "pilot" ? "Pilot offer: £0 setup and a free 7-day pilot. Indicative plans start at £149/month afterwards. No payment is taken on this website." : "We’ll contact you to arrange a demo tailored to your business. No public demo number is available on this page."}
       </p>
       <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-        By submitting, you’re asking FrontDesk to contact you about this request. Read our{" "}
+        By submitting, you’re asking Callwoven to contact you about this request. Read our{" "}
         <a href="/privacy" className="font-medium underline underline-offset-2 hover:text-foreground">
           privacy summary
         </a>

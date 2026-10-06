@@ -6,9 +6,9 @@ export const Route = createFileRoute("/dashboard")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Dashboard — FrontDesk" },
-      { name: "description", content: "Internal operations dashboard for FrontDesk leads and pilots." },
-      { property: "og:title", content: "Dashboard — FrontDesk" },
+      { title: "Dashboard — Callwoven" },
+      { name: "description", content: "Internal operations dashboard for Callwoven leads and pilots." },
+      { property: "og:title", content: "Dashboard — Callwoven" },
       { property: "og:description", content: "Internal operations dashboard." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -38,7 +38,7 @@ function DashboardLayout() {
       <header className="border-b border-border bg-card">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 py-3 sm:px-6">
           <Link to="/" className="text-sm font-bold tracking-tight">
-            FrontDesk <span className="font-medium text-muted-foreground">Ops</span>
+            Callwoven <span className="font-medium text-muted-foreground">Ops</span>
           </Link>
           <nav className="flex gap-1">
             <Link to="/dashboard/leads" className={tab} activeProps={{ className: "bg-muted !text-foreground" }}>Leads</Link>

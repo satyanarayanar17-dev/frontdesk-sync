@@ -4,7 +4,7 @@ import { useLiveTable } from "@/hooks/use-live-table";
 import { fmtTime, label, PILOT_STATUSES, type PilotInterest } from "@/lib/supabase";
 
 export const Route = createFileRoute("/dashboard/pilots")({
-  staticData: { sitemap: false }, component: PilotsPage });
+  staticData: { sitemap: false }, head: () => ({ meta: [{ title: "Callwoven Pilot interests" }, { name: "description", content: "Owner view of Callwoven website pilot enquiries." }, { property: "og:title", content: "Callwoven Pilot interests" }, { property: "og:description", content: "Owner view of Callwoven website pilot enquiries." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex" }] }), component: PilotsPage });
 
 function PilotsPage() {
   const { rows, loading, error, realtime, reload, updateStatus } = useLiveTable<PilotInterest>("frontdesk_pilot_interests");
