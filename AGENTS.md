@@ -11,3 +11,4 @@
 
 - Public marketing pages share `src/components/Marketing.tsx` while owner routes stay independent, so brand changes do not alter operations.
 - Demo and pilot interest reuse `frontdesk_pilot_interests` with source and request markers in `notes`, so no production schema migration is needed.
+- Callwoven uses a source SVG ribbon logo shared with its favicon and a separate decorative bitmap ribbon, so branding remains scalable and illustrations never replace functional UI.
