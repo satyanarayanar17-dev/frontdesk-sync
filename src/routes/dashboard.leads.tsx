@@ -7,7 +7,7 @@ import { checkWebhookHealth } from "@/lib/health.functions";
 import { fmtTime, label, LEAD_STATUSES, URGENCIES, type Lead } from "@/lib/supabase";
 
 export const Route = createFileRoute("/dashboard/leads")({
-  staticData: { sitemap: false }, component: LeadsPage });
+  staticData: { sitemap: false }, head: () => ({ meta: [{ title: "Callwoven Leads" }, { name: "description", content: "Owner view of Callwoven call enquiries and follow-up." }, { property: "og:title", content: "Callwoven Leads" }, { property: "og:description", content: "Owner view of Callwoven call enquiries and follow-up." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex" }] }), component: LeadsPage });
 
 const urgencyClass = (u?: string | null) =>
   u === "emergency"

@@ -6,20 +6,20 @@ export const Route = createFileRoute("/privacy")({
   staticData: { sitemap: true },
   head: () =>
     pageHead(
-      "Privacy Notice | FrontDesk",
-      "How FrontDesk handles information submitted through its demo and pilot enquiry forms.",
+      "Privacy Notice | Callwoven",
+      "How Callwoven handles information submitted through its demo and pilot enquiry forms.",
     ),
   component: Privacy,
 });
 
 const sections: [string, string][] = [
   [
-    "Who operates FrontDesk",
-    "FrontDesk is a trading name of T Satya Narayana Reddy, a sole proprietor based in India. For this website, T Satya Narayana Reddy is responsible for deciding how enquiry information is used.",
+    "Who operates Callwoven",
+    "Callwoven is a trading name of T Satya Narayana Reddy, a sole proprietor based in India. For this website, T Satya Narayana Reddy is responsible for deciding how enquiry information is used.",
   ],
   [
     "Scope of this notice",
-    "This website accepts requests for arranged demos and discussions about tailored 7-day pilots. FrontDesk does not take payment or activate customer call handling through this website; setup and service terms are agreed separately.",
+    "This website accepts requests for arranged demos and discussions about tailored 7-day pilots. Callwoven does not take payment or activate customer call handling through this website; setup and service terms are agreed separately.",
   ],
   [
     "What we collect",
@@ -43,11 +43,11 @@ const sections: [string, string][] = [
   ],
   [
     "Privacy enquiries",
-    "Use the demo-access form and write “Privacy” in the notes field. We will respond using the email address you provide. A dedicated public email and business correspondence address will be added before FrontDesk enters paid service agreements or begins customer call handling.",
+    "Email satya@callwoven.com for privacy enquiries. A business correspondence address will be confirmed before paid service agreements or customer call handling begins.",
   ],
   [
     "Future customer call handling",
-    "Before live dental or trades call handling begins for a customer, FrontDesk and the customer business will agree the required processing terms, caller notices, recording and transcription choices, retention rules, international-transfer safeguards and protections for any sensitive information. Customer call data is outside the scope of this website enquiry notice.",
+    "Before live dental or trades call handling begins for a customer, Callwoven and the customer business will agree the required processing terms, caller notices, recording and transcription choices, retention rules, international-transfer safeguards and protections for any sensitive information. Customer call data is outside the scope of this website enquiry notice.",
   ],
 ];
 
@@ -62,8 +62,8 @@ function Privacy() {
           How we handle website enquiries.
         </h1>
         <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-          This notice covers information submitted through the FrontDesk website. Last
-          updated 1 October 2026.
+          This notice covers information submitted through the Callwoven website. Last
+          updated 6 October 2026.
         </p>
         <div className="mt-12 space-y-10">
           {sections.map(([heading, body]) => (

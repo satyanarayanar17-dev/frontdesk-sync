@@ -79,18 +79,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "FRONTDESK | AI call handling for busy businesses" },
+      { title: "Callwoven | AI call handling for busy businesses" },
       {
         name: "description",
         content:
-          "FRONTDESK answers business calls, handles routine enquiries and captures appointment or job requests for UK service businesses.",
+          "Callwoven answers business calls, handles routine enquiries and captures appointment or job requests for UK service businesses.",
       },
-      { name: "author", content: "FRONTDESK" },
-      { property: "og:title", content: "FRONTDESK | AI call handling for busy businesses" },
+      { name: "author", content: "Callwoven" },
+      { property: "og:title", content: "Callwoven | AI call handling for busy businesses" },
       {
         property: "og:description",
         content:
-          "FRONTDESK answers business calls, handles routine enquiries and captures appointment or job requests for UK service businesses.",
+          "Callwoven answers business calls, handles routine enquiries and captures appointment or job requests for UK service businesses.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -100,7 +100,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       {
         rel: "preconnect",
         href: "https://fonts.googleapis.com",
@@ -112,7 +112,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@400;500;600;700&display=swap",
       },
     ],
   }),
