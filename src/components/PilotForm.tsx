@@ -125,11 +125,12 @@ export function PilotForm({ source = "home", buttonText = "Request Pilot Access"
         </p>
         <Button
           type="button"
+          variant="outline"
           onClick={() => {
             setFields(EMPTY);
             setSubmitted(false);
           }}
-          className="mt-6 text-sm font-medium text-brand underline-offset-4 hover:underline"
+          className="mt-6 text-sm font-medium"
         >
           Submit another enquiry
         </Button>
