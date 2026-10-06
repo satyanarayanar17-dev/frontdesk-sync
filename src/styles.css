@@ -45,7 +45,7 @@
 
 @theme {
   --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Archivo", "Work Sans", ui-sans-serif, sans-serif;
+  --font-display: "Instrument Serif", Georgia, serif;
 }
 
 :root {
@@ -133,7 +133,7 @@
 }
 .woven-shadow { box-shadow: var(--shadow-woven); }
 .woven-ribbon { animation: ribbon-drift 9s ease-in-out infinite; }
-@keyframes ribbon-drift { 50% { transform: translateY(-8px) rotate(-2deg); } }
+@keyframes ribbon-drift { 50% { rotate: -2deg; } }
 @media (prefers-reduced-motion: reduce) {
  html { scroll-behavior: auto; }
  *, *::before, *::after { animation: none !important; transition: none !important; }
